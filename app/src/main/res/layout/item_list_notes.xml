@@ -16,9 +16,9 @@
             android:id="@+id/ivItemListNotes"
             android:layout_width="92dp"
             android:layout_height="92dp"
-            tools:src="@drawable/img_cover"
+            android:background="@drawable/img_cover"
             android:scaleType="centerCrop"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"/>
         <TextView
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             tools:text="26 january 2019"
             android:layout_marginTop="14dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
             android:textColor="@color/colorGray"/>
         <TextView
             android:id="@+id/tvItemListNotesTitle"
@@ -35,11 +35,11 @@
             android:layout_height="wrap_content"
             tools:text="Paradise Lost"
             android:layout_below="@id/tvItemListNotesDate"
-            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:textSize="24sp"
             android:maxLines="2"
-            android:layout_toLeftOf="@id/ivItemListNotes"
+            android:layout_toStartOf="@id/ivItemListNotes"
             android:textColor="@color/colorBlack"
             />
 

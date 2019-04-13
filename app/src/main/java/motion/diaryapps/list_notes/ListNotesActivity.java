@@ -1,8 +1,7 @@
 package motion.diaryapps.list_notes;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +27,7 @@ public class ListNotesActivity extends AppCompatActivity {
 
     /**
      * Method ini digunakan untuk menjalankan aksi ketika activity dibuat
+     *
      * @param savedInstanceState
      */
     @Override
@@ -38,8 +38,10 @@ public class ListNotesActivity extends AppCompatActivity {
         initToolbar();
 
         // TODO: 4/12/19 panggil initRecyclerView() disini
+        initRecyclerView();
 
         // TODO: 4/12/19 panggil initDummy() disini
+        initDummy();
     }
 
     /**
@@ -57,14 +59,14 @@ public class ListNotesActivity extends AppCompatActivity {
     public void initRecyclerView() {
         // TODO: 4/12/19 -> ganti null dengan component RecyclerView pada activity_list_notes
         // hint: gunakan findViewById(R.id.xxxxx);
-        mRecyclerView = null;
+        mRecyclerView = findViewById(R.id.rvListNotes);
 
         // TODO: 4/12/19 -> ganti null dengan objek ListNotesAdapter
-        mAdapter = null;
+        mAdapter = new ListNotesAdapter(mLists, this);
 
         // TODO: 4/12/19 -> ganti null dengan objek LinearLayoutManager
-        mLayoutManager = null;
-
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL
+                , false);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -78,7 +80,25 @@ public class ListNotesActivity extends AppCompatActivity {
         // hint: lakukan setelah menambahkan constructor pada ListNotesModel
         // untuk date gunakan Tools.getCurrentDateISO8601()
 
-        mLists.add(new ListNotesModel());
+        mLists.add(new ListNotesModel("01"
+                , "https://raw.githubusercontent.com/MobileInnovationLab/DiaryApps/master/app/src/main/res/drawable/img_cover.png"
+                , "Paradise Lost", Tools.getCurrentDateISO8601()));
+        mLists.add(new ListNotesModel("01"
+                , "https://raw.githubusercontent.com/MobileInnovationLab/DiaryApps/master/app/src/main/res/drawable/img_cover.png"
+                , "Paradise Lost", Tools.getCurrentDateISO8601()));
+        mLists.add(new ListNotesModel("01"
+                , "https://raw.githubusercontent.com/MobileInnovationLab/DiaryApps/master/app/src/main/res/drawable/img_cover.png"
+                , "Paradise Lost", Tools.getCurrentDateISO8601()));
+        mLists.add(new ListNotesModel("01"
+                , "https://raw.githubusercontent.com/MobileInnovationLab/DiaryApps/master/app/src/main/res/drawable/img_cover.png"
+                , "Paradise Lost", Tools.getCurrentDateISO8601()));
+        mLists.add(new ListNotesModel("01"
+                , "https://raw.githubusercontent.com/MobileInnovationLab/DiaryApps/master/app/src/main/res/drawable/img_cover.png"
+                , "Paradise Lost", Tools.getCurrentDateISO8601()));
+        mLists.add(new ListNotesModel("01"
+                , "https://raw.githubusercontent.com/MobileInnovationLab/DiaryApps/master/app/src/main/res/drawable/img_cover.png"
+                , "Paradise Lost", Tools.getCurrentDateISO8601()));
+
 
         mAdapter.notifyDataSetChanged();
     }
@@ -104,7 +124,6 @@ public class ListNotesActivity extends AppCompatActivity {
      * @param item MenuItem Bawaan
      * @return jika item yang di klik merupakan menuAdd maka panggil
      * method {@code startActivity(context)} pada class {@link CreateNotesActivity}
-     *
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import motion.diaryapps.R;
+import motion.diaryapps.dao.DiaryDao;
 import motion.diaryapps.detail_notes.DetailNotesActivity;
 import motion.diaryapps.utils.Tools;
 
@@ -28,10 +29,16 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
     // TODO: 4/12/19 -> Tambahkan Constructor disini
     // hint: gunakan alt+insert
 
+    public ListNotesAdapter(List<ListNotesModel> mLists, Context mContext) {
+        this.mLists = mLists;
+        this.mContext = mContext;
+    }
+
     /**
      * Method ini digunakan untuk membuat ViewHolder dari item yang akan diulang
+     *
      * @param viewGroup parent view
-     * @param i position
+     * @param i         position
      * @return ViewHolder
      */
     @NonNull
@@ -40,10 +47,11 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
         mContext = viewGroup.getContext();
 
         // TODO: 4/12/19 -> ganti null dengan LayoutInflater.from(...).inflate(...)
-        View view = null;
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_notes
+                , viewGroup, false);
 
         // TODO: 4/12/19 -> ganti null dengan Inisialisasi objek ViewHolder disini dengan memasukkan view yang telah dibuat
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
     }
@@ -51,15 +59,19 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
     /**
      * Method ini digunakan untuk memasang data pada viewHolder,
      * method ini juga dipanggil setiap kali menggunakan {@code Adapter.notifyDataSetChanged()}
+     *
      * @param viewHolder view dari item
-     * @param i position item
+     * @param i          position item
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final int position = i;
+        final ListNotesModel listNotesModel = mLists.get(position);
 
         // TODO: 4/12/19 -> set setiap component yang akan tampil sesuai dengan data pada mList
         // hint: untuk date gunakan Tools.getNormalDate(....)
+        viewHolder.tvItemListNotesTitle.setText(listNotesModel.getTitle());
+        viewHolder.tvItemListNotesDate.setText(Tools.getNormalDate(listNotesModel.getDate()));
 
         viewHolder.cvItemListNotes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,24 +79,25 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
 
                 // TODO: 4/12/19 -> ganti null dengan objek Intent baru ke DetailNotesActivity disini
                 // hint: gunakan mContext untuk mengisi parameter context
-                Intent intent = null;
+                Intent intent = new Intent(mContext, DetailNotesActivity.class);
 
                 mContext.startActivity(intent);
             }
         });
 
-        Tools.setImage(viewHolder.ivItemListNotes,mLists.get(position).getImage_url());
+        Tools.setImage(viewHolder.ivItemListNotes, mLists.get(position).getImage_url());
     }
 
     /**
      * method ini digunakan untuk menampilkan jumlah item yang akan tampil
+     *
      * @return list size
      */
     @Override
     public int getItemCount() {
         // TODO: 4/12/19 -> ganti return menjadi panjang list
         // hint : gunakan method xxxx.size()
-        return 0;
+        return mLists.size();
     }
 
     /**
@@ -99,6 +112,7 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
 
         // TODO: 4/12/19  -> buat attribute setiap component disini
         // hint: ikuti contoh diatas
+        TextView tvItemListNotesDate, tvItemListNotesTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -108,6 +122,8 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
 
             // TODO: 4/12/19 -> inisialisasi setiap attribute dengan idnya disini
             // hint: gunakan itemView.findViewById(R.id.xxxxx) seperti contoh diatas
+            tvItemListNotesDate = itemView.findViewById(R.id.tvItemListNotesDate);
+            tvItemListNotesTitle = itemView.findViewById(R.id.tvItemListNotesTitle);
 
         }
     }
